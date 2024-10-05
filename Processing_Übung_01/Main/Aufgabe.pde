@@ -27,31 +27,37 @@
 
 */
 public class Aufgabe1{
-  
+  private int value = 0;
   //Input: Du erhaelst eine Zahl vom Typ Integer.
-  //Ziel: Multipliziere die Zahl und gebe deas Ergebnis zurueck
+  //Ziel: Multipliziere die Zahl und gebe das Ergebnis zurueck
   public int timesTwo(int input){
-    
-    return 0;
+    return input * 2;
   }
   
   
   //Input: Du erhaelst eine Zahl vom Typ Integer.
   //Ziel: schau, ob Zahl groesser als fuenf ist.
   public boolean isGreaterThanFive(int input){
-    return false;
+    return input > 5;
   }
   
   //Input: drei Zahlen
   //Ziel: Gebe den groessten der drei Werte zurueck.
   public int getHighestValue(int a, int b, int c){
-    return 0;
+    int highest = a;
+    if (b > highest) {
+      highest = b;
+    }
+    if (c > highest) {
+      highest = c;
+    }
+    return highest;
   }
   
   //Input: eine Zahl n
   //Ziel: Gebe die Quadratzahl zurueck. Bsp. getSquare(1) = 1; getSquare(5) = 25;
   public int getSquare(int n){
-    return n;
+    return n * n;
   }
   
   //Input: eine Zahl x
@@ -60,7 +66,11 @@ public class Aufgabe1{
   //        getAbsoluteValue(-3) = 3
   //        getAbsoluteValue(0) = 0
   public int getAbsoluteValue(int x){
-    return 0;
+    if (x <= 0) {
+      return -x;
+    }
+    return x;
+    // return abs(x);
   }
   
   //Input: eine Zahl
@@ -69,7 +79,9 @@ public class Aufgabe1{
   //        getLastValue(17) = -6
   //        getLastValue(2) = 17 //usw.
   public int getLastValue(int nextValue){
-    return 0;
+    int answer = value;
+    value = nextValue;
+    return answer;
   }
   
 }

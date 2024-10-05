@@ -61,7 +61,8 @@ public class Aufgabe2{
   //Input: ein String
   //Ziel: ueberpruefe, ob der String gleich "Fun" ist. Falls ja, dann gib "yes" zurueck, andernfalls "no"
   public String isItFun(String s){
-    return "";
+    // <bedingung> ? <wert_bedingung_erfüllt> : <wert_bedingung_nicht_erfüllt>
+    return (s.equals("Fun")) ? "yes" : "no";
   }
   
   //Input: ein String mit mind. Laenge 3
@@ -70,19 +71,30 @@ public class Aufgabe2{
   //makeItThree("Funny") = "FunFunFun";//"Funny" wird zu "Fun", dann haengen wir es zweimal noch an.
   
   public String makeItThree(String s){
-    return "";
+    String substr = s.substring(0, 3); // ersten drei Zeichen
+    return substr + substr + substr;
   }
   
   //Input: ein String, ein Zeichen
   //Ziel: Zaehle, wie oft das Zeichen c im String vorkommt
   public int countChar(String s, char c){
-    return 0;
+    int result = 0;
+    for (int i = 0; i < s.length(); i++) {
+      if (s.charAt(i) == c) {
+        result++;
+      }
+    }
+    return result;
   }
   //Input: Ein String
   //Ziel: Palindrome kann man vor- und rueckwaerts gleich lesen, z.B. Otto, Uhu
   //      Pruefe, ob die Eingabe ein Palindrom ist
   public boolean isPalindrome(String s){
-    return false;
+    String ersteHaelfte = s.substring(0, s.length() / 2);
+    String ersteHaelfteGespiegelt = new StringBuilder(ersteHaelfte)
+                                      .reverse()
+                                      .toString();
+    return s.endsWith(ersteHaelfteGespiegelt);
   }
   
 }
