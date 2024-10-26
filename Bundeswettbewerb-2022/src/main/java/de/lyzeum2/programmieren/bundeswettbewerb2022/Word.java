@@ -6,10 +6,12 @@ public class Word {
 
     private String word;
     private String ending;
+
     public Word(String word) {
         this.word = word;
         this.ending = calculateEnding();
     }
+
     private String calculateEnding() {
         ArrayList<Integer> startPoints = new ArrayList<>();
         boolean previousVocal = false;
@@ -29,22 +31,28 @@ public class Word {
         }
         if (startPoints.isEmpty()) {
             return "";
-        }else if(startPoints.size() == 1) {
+        } else if (startPoints.size() == 1) {
             return word.substring(startPoints.get(0));
-        }else {
+        } else {
             return word.substring(startPoints.get(1));
         }
     }
+
     private boolean isVocal(char c) {
         return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u'
                 || c == 'ä' || c == 'ö' || c == 'ü';
     }
 
     public String getWord() {
-        return word;
+        return word.toLowerCase();
     }
 
     public String getEnding() {
-        return ending;
+        return ending.toLowerCase();
+    }
+
+    // Endung besitzt mehr als die Haelfte des Wortes
+    public boolean isValid() {
+        return ending.length() * 2 >= word.length();
     }
 }
