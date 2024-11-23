@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.GridPane?>
@@ -15,8 +16,8 @@
           alignment="CENTER"
           fx:controller="de.lyzeum2.programmieren.cakeclicker.CakeClickerController">
     <rowConstraints>
-        <RowConstraints percentHeight="15" />
-        <RowConstraints percentHeight="70" />
+        <RowConstraints vgrow="NEVER" />
+        <RowConstraints vgrow="SOMETIMES" />
         <RowConstraints percentHeight="15" />
     </rowConstraints>
     <columnConstraints>
@@ -33,10 +34,38 @@
         style="-fx-background-color: red;"
         alignment="BASELINE_RIGHT"
     >
+        <padding>
+            <Insets topRightBottomLeft="10"/>
+        </padding>
         <Label
                 fx:id="lblCounter"
-                text="0" textFill="white"
-
-        />
+                text="0"
+                textFill="white"
+        >
+            <font>
+                <Font size="40"/>
+            </font>
+        </Label>
+    </HBox>
+    <HBox
+        fx:id="hboxCake"
+        GridPane.columnIndex="1"
+        GridPane.rowIndex="1"
+        alignment="CENTER"
+        maxWidth="Infinity"
+        maxHeight="Infinity"
+        >
+        <Button
+            HBox.hgrow="ALWAYS"
+            fx:id="btnCake"
+            text="Cake"
+            onAction="#onCakeClick"
+            maxWidth="Infinity"
+            maxHeight="Infinity"
+        >
+            <font>
+                <Font size="60" />
+            </font>
+        </Button>
     </HBox>
 </GridPane>

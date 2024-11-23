@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class CakeClickerApplication extends Application {
+    private GameState gameState;
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(CakeClickerApplication.class.getResource("hello-view.fxml"));
@@ -17,6 +19,10 @@ public class CakeClickerApplication extends Application {
         stage.setMinHeight(600);
         stage.setScene(scene);
         stage.show();
+
+        CakeClickerController controller = fxmlLoader.getController();
+        gameState = new GameState();
+        controller.setGameState(gameState);
     }
 
     public static void main(String[] args) {
