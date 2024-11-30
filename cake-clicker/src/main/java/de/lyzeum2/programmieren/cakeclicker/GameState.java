@@ -5,26 +5,19 @@ public class GameState {
     private long clickValue;
     private String[] upgradeNames;
     private long[] upgradeCosts;
+    private Item[] items;
 
     public GameState() {
         counter = 0;
         clickValue = 1;
-        upgradeNames = new String[]{
-                "Backofen",
-                "Zitronenkuchen",
-                "Schokokuchen",
-                "Pancake",
-                "Keksbaum",
-                "Super Smelter",
-                "Schwarzwälderkirschtorte"
-        };
-        upgradeCosts = new long[]{
-                100,
-                500,
-                2500,
-                20000,
-                100000,
-                5000000,
+        items = new Item[]{
+                new Item( "Backofen", 100, 0, 1, 1),
+                new Item( "Zitronenkuchen", 500, 0, 10, 1),
+                new Item( "Schokokuchen", 2500, 0, 60, 3),
+                new Item( "Pancake", 20000, 0, 750, 5),
+                new Item( "Keksbaum", 100000, 0, 4000, 10),
+                new Item( "Super Smelter", 5_000_000, 0, 5000, 10000),
+                new Item( "Schwarzwälderkirschtorte", 10_000_000, 0, 50000, 50000),
         };
     }
 
@@ -34,5 +27,9 @@ public class GameState {
 
     public long getCounter() {
         return counter;
+    }
+
+    public Item[] getUpgrades() {
+        return items;
     }
 }
