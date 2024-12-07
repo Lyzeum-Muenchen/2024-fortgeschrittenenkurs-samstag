@@ -9,13 +9,18 @@ import javafx.scene.text.Font;
 
 public class UpgradePane extends GridPane {
     private GameState gameState;
+    private CakeClickerController controller;
     private Item item;
     private Label lblName;
     private Label lblCount;
     private Button btnUpgrade;
 
-    public UpgradePane(GameState gameState, Item item) {
+    public UpgradePane(GameState gameState,
+                       Item item,
+                       CakeClickerController controller
+    ) {
         super();
+        this.controller = controller;
         this.gameState = gameState;
         this.item = item;
 
@@ -53,7 +58,17 @@ public class UpgradePane extends GridPane {
         this.add(btnUpgrade, 2, 0);
     }
     public void onButtonClick(ActionEvent event) {
-
+        // UpgradeCounter erhöhen
+        // Counter wird verrringert
+        // ClickValue und automaticClickValue wird erhöht
+        // Anzeige soll sich aktualisieren
+        item.setCount(item.getCount() + 1);
+        gameState.buyUpgrade(
+                item.getUpgradeCost(),
+                item.getManualClickValue(),
+                item.getAutomaticClickValue()
+        );
+        controller.updateScreen();
     }
     public void updatePane() {
         lblCount.setText(item.getCount() + "");

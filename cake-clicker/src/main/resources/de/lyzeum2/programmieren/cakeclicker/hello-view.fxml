@@ -10,6 +10,8 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
 <GridPane xmlns:fx="http://javafx.com/fxml"
           maxHeight="Infinity"
           maxWidth="Infinity"
@@ -47,25 +49,21 @@
             </font>
         </Label>
     </HBox>
-    <HBox
+    <StackPane
         fx:id="hboxCake"
         GridPane.columnIndex="1"
         GridPane.rowIndex="1"
-        alignment="CENTER"
-        maxWidth="Infinity"
-        maxHeight="Infinity"
         >
-        <Button
+        <ImageView
             HBox.hgrow="ALWAYS"
-            fx:id="btnCake"
-            text="Cake"
-            onAction="#onCakeClick"
-            maxWidth="Infinity"
-            maxHeight="Infinity"
+            fx:id="imgCake"
+            onMouseClicked="#onCakeClick"
+            fitWidth="512"
+            fitHeight="512"
+            pickOnBounds="true"
+            cache="true"
         >
-            <font>
-                <Font size="60" />
-            </font>
-        </Button>
-    </HBox>
+
+        </ImageView>
+    </StackPane>
 </GridPane>

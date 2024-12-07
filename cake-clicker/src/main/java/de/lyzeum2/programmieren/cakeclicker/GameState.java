@@ -3,6 +3,7 @@ package de.lyzeum2.programmieren.cakeclicker;
 public class GameState {
     private long counter;
     private long clickValue;
+    private long automaticClickValue;
     private String[] upgradeNames;
     private long[] upgradeCosts;
     private Item[] items;
@@ -10,6 +11,7 @@ public class GameState {
     public GameState() {
         counter = 0;
         clickValue = 1;
+        automaticClickValue = 0;
         items = new Item[]{
                 new Item( "Backofen", 100, 0, 1, 1),
                 new Item( "Zitronenkuchen", 500, 0, 10, 1),
@@ -31,5 +33,15 @@ public class GameState {
 
     public Item[] getUpgrades() {
         return items;
+    }
+
+    public void buyUpgrade(
+            long upgradeCost,
+            long clickValue,
+            long automaticClickValue
+    ) {
+        this.counter = counter - upgradeCost;
+        this.clickValue += clickValue;
+        this.automaticClickValue += automaticClickValue;
     }
 }
