@@ -63,6 +63,8 @@ public class UpgradePane extends GridPane {
         // ClickValue und automaticClickValue wird erhöht
         // Anzeige soll sich aktualisieren
         item.setCount(item.getCount() + 1);
+        item.setUpgradeCost((long)(item.getUpgradeCost() * 1.05));
+        btnUpgrade.setText(item.getUpgradeCost() + " Slices");
         gameState.buyUpgrade(
                 item.getUpgradeCost(),
                 item.getManualClickValue(),

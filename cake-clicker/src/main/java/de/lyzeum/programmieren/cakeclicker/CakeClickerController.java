@@ -1,11 +1,17 @@
 package de.lyzeum.programmieren.cakeclicker;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,6 +29,9 @@ public class CakeClickerController implements Initializable {
     private ImageView imgCake;
     private final Image img;
 
+    private Timeline tlCakeAnimation;
+    private Timeline tlAutomaticClick;
+
     private ArrayList<UpgradePane> upgrades;
     public CakeClickerController() {
         img = new Image(
@@ -32,8 +41,13 @@ public class CakeClickerController implements Initializable {
         );
     }
 
+    // TODO: Nur linker Mausklick zulassen
     public void onCakeClick() {
         gameState.onClick();
+        // Größe des Kuchens ändern
+        double nextSize = Math.min(imgCake.getFitWidth() * 1.05, 640);
+        imgCake.setFitWidth(nextSize);
+        imgCake.setFitHeight(nextSize);
         updateScreen();
     }
     // Counter aktualisieren, Upgrades aktualisieren
@@ -54,6 +68,41 @@ public class CakeClickerController implements Initializable {
         upgrades = new ArrayList<>();
         imgCake.setImage(img);
         imgCake.setPreserveRatio(true);
+        EventHandler<ActionEvent> eventCake = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                // Kuchen um 1% verkleinern
+                double nextSize = Math.max(512, imgCake.getFitWidth() * 0.995);
+                imgCake.setFitWidth(nextSize);
+                imgCake.setFitHeight(nextSize);
+            }
+        };
+        KeyFrame kfCake = new KeyFrame(
+                Duration.millis(15),
+                "cakeAnimation",
+                eventCake
+        );
+
+        tlCakeAnimation = new Timeline(kfCake);
+        // spiele Animation unendlich lange ab
+        tlCakeAnimation.setCycleCount(Animation.INDEFINITE);
+        tlCakeAnimation.play();
+
+        EventHandler<ActionEvent> eventAutomaticClick = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                gameState.onAutomaticClick();
+                updateScreen();
+            }
+        };
+        KeyFrame kfAutomaticClick = new KeyFrame(
+                Duration.seconds(1),
+                "kfAutomaticClick",
+                eventAutomaticClick
+        );
+        tlAutomaticClick = new Timeline(kfAutomaticClick);
+        tlAutomaticClick.setCycleCount(Animation.INDEFINITE);
+        tlAutomaticClick.play();
     }
 
     public void createUpdatePanes() {

@@ -1,9 +1,9 @@
 package de.lyzeum.programmieren.cakeclicker;
 
 public class GameState {
-    private long counter;
-    private long clickValue;
-    private long automaticClickValue;
+    private long counter; // Aktueller Stand
+    private long clickValue; // Wert eines manuellen Klicks
+    private long automaticClickValue; // Wert eines automatischen Klicks
     private String[] upgradeNames;
     private long[] upgradeCosts;
     private Item[] items;
@@ -11,7 +11,7 @@ public class GameState {
     public GameState() {
         counter = 0;
         clickValue = 1;
-        automaticClickValue = 0;
+        automaticClickValue = 1;
         items = new Item[]{
                 new Item( "Backofen", 100, 0, 1, 1),
                 new Item( "Zitronenkuchen", 500, 0, 10, 1),
@@ -25,6 +25,10 @@ public class GameState {
 
     public void onClick() {
         counter += clickValue;
+    }
+
+    public void onAutomaticClick() {
+        counter = counter + automaticClickValue;
     }
 
     public long getCounter() {
