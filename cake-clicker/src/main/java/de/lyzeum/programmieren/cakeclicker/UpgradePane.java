@@ -1,4 +1,4 @@
-package de.lyzeum2.programmieren.cakeclicker;
+package de.lyzeum.programmieren.cakeclicker;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;

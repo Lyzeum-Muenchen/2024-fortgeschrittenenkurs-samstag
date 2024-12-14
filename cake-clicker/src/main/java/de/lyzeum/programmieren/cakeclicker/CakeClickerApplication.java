@@ -1,4 +1,4 @@
-package de.lyzeum2.programmieren.cakeclicker;
+package de.lyzeum.programmieren.cakeclicker;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

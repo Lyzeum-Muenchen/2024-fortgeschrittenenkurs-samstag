@@ -1,8 +1,8 @@
-module de.lyzeum2.programmieren.cakeclicker {
+module de.lyzeum.programmieren.cakeclicker {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens de.lyzeum2.programmieren.cakeclicker to javafx.fxml;
-    exports de.lyzeum2.programmieren.cakeclicker;
+    opens de.lyzeum.programmieren.cakeclicker to javafx.fxml;
+    exports de.lyzeum.programmieren.cakeclicker;
 }

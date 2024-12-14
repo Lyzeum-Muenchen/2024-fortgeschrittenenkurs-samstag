@@ -6,7 +6,7 @@ plugins {
     id 'org.beryx.jlink' version '2.25.0'
 }
 
-group 'de.lyzeum2.programmieren'
+group 'de.lyzeum.programmieren'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -25,12 +25,12 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-    mainModule = 'de.lyzeum2.programmieren.cakeclicker'
-    mainClass = 'de.lyzeum2.programmieren.cakeclicker.CakeClickerApplication'
+    mainModule = 'de.lyzeum.programmieren.cakeclicker'
+    mainClass = 'de.lyzeum.programmieren.cakeclicker.CakeClickerApplication'
 }
 
 javafx {
-    version = '21'
+    version = '21.0.2'
     modules = ['javafx.controls', 'javafx.fxml']
 }
 

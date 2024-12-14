@@ -16,7 +16,7 @@
           maxHeight="Infinity"
           maxWidth="Infinity"
           alignment="CENTER"
-          fx:controller="de.lyzeum2.programmieren.cakeclicker.CakeClickerController">
+          fx:controller="de.lyzeum.programmieren.cakeclicker.CakeClickerController">
     <rowConstraints>
         <RowConstraints vgrow="NEVER" />
         <RowConstraints vgrow="SOMETIMES" />
