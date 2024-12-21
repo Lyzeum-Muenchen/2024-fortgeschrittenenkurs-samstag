@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.StackPane?>
+<?import de.lyzeum.programmieren.cakeclicker.TextPane?>
 <GridPane xmlns:fx="http://javafx.com/fxml"
           maxHeight="Infinity"
           maxWidth="Infinity"
@@ -62,8 +63,7 @@
             fitHeight="512"
             pickOnBounds="true"
             cache="true"
-        >
-
-        </ImageView>
+        />
+        <TextPane fx:id="textPane"/>
     </StackPane>
 </GridPane>

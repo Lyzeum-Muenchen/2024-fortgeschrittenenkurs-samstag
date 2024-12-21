@@ -10,6 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -29,6 +31,9 @@ public class CakeClickerController implements Initializable {
     private ImageView imgCake;
     private final Image img;
 
+    @FXML
+    private TextPane textPane;
+
     private Timeline tlCakeAnimation;
     private Timeline tlAutomaticClick;
 
@@ -41,14 +46,21 @@ public class CakeClickerController implements Initializable {
         );
     }
 
-    // TODO: Nur linker Mausklick zulassen
-    public void onCakeClick() {
-        gameState.onClick();
-        // Größe des Kuchens ändern
-        double nextSize = Math.min(imgCake.getFitWidth() * 1.05, 640);
-        imgCake.setFitWidth(nextSize);
-        imgCake.setFitHeight(nextSize);
-        updateScreen();
+    public void onCakeClick(MouseEvent event) {
+        if (event.getButton().equals(MouseButton.PRIMARY)) {
+            gameState.onClick();
+            // Größe des Kuchens ändern
+            double nextSize = Math.min(imgCake.getFitWidth() * 1.05, 640);
+            imgCake.setFitWidth(nextSize);
+            imgCake.setFitHeight(nextSize);
+            updateScreen();
+            String textToShow = "+" + gameState.getClickValue();
+            // Setze Text auf korrekte Koordinate abhängig von Kuchenpos. und Mauspos.
+            double posX = event.getX() + imgCake.getLayoutX();
+            double posY = event.getY() + imgCake.getLayoutY();
+            textPane.showTextWithTransition(textToShow, posX, posY);
+        }
+
     }
     // Counter aktualisieren, Upgrades aktualisieren
     public void updateScreen() {

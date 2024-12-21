@@ -48,4 +48,8 @@ public class GameState {
         this.clickValue += clickValue;
         this.automaticClickValue += automaticClickValue;
     }
+
+    public long getClickValue() {
+        return clickValue;
+    }
 }
