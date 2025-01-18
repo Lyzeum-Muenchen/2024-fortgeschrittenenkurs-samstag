@@ -1,6 +1,8 @@
 package de.lyzeum.programmieren.cakeclicker;
 
-public class GameState {
+import java.io.Serializable;
+
+public class GameState implements Serializable {
     private long counter; // Aktueller Stand
     private long clickValue; // Wert eines manuellen Klicks
     private long automaticClickValue; // Wert eines automatischen Klicks
@@ -51,5 +53,9 @@ public class GameState {
 
     public long getClickValue() {
         return clickValue;
+    }
+
+    public long getAutomaticClickValue() {
+        return automaticClickValue;
     }
 }

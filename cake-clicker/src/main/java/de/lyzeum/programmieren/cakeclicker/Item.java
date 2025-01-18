@@ -1,6 +1,8 @@
 package de.lyzeum.programmieren.cakeclicker;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
     private String upgradeName;
     private long upgradeCost;
     private int count;

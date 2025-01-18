@@ -104,6 +104,13 @@ public class CakeClickerController implements Initializable {
             @Override
             public void handle(ActionEvent actionEvent) {
                 gameState.onAutomaticClick();
+                if (gameState.getAutomaticClickValue() > 0) {
+                    textPane.showTextWithTransition(
+                            "+" + gameState.getAutomaticClickValue(),
+                            imgCake.getLayoutX() + imgCake.getFitWidth() / 2,
+                            imgCake.getLayoutY() + imgCake.getFitHeight() / 4
+                    );
+                }
                 updateScreen();
             }
         };

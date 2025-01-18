@@ -1,6 +1,7 @@
 package de.lyzeum.programmieren.cakeclicker;
 
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
@@ -20,6 +21,7 @@ public class UpgradePane extends GridPane {
                        CakeClickerController controller
     ) {
         super();
+        this.setPadding(new Insets(5)); // Abstaende zwischen Elementen im GridPane
         this.controller = controller;
         this.gameState = gameState;
         this.item = item;
