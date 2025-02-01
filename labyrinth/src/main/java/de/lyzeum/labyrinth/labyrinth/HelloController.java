@@ -17,8 +17,8 @@ public class HelloController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        int tileLength = 100;
-        l = new Labyrinth();
+        int tileLength = 30;
+        l = new Labyrinth(30, 20);
         var gc = canvas.getGraphicsContext2D();
         int width = l.getWidth();
         int height = l.getHeight();
