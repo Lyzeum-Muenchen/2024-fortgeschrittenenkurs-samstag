@@ -11,17 +11,25 @@ import java.util.ResourceBundle;
 public class HelloController implements Initializable {
 
     @FXML
+    private ConfigurationPanel configurationPanel;
+
+    @FXML
     private Canvas canvas;
 
     private Labyrinth l;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void setLabyrinth(Labyrinth l) {
+        this.l = l;
+        drawLabyrinth();
+    }
+
+    private void drawLabyrinth() {
         int tileLength = 30;
-        l = new Labyrinth(30, 20);
         var gc = canvas.getGraphicsContext2D();
         int width = l.getWidth();
         int height = l.getHeight();
+        // lösche alten Inhalt
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         gc.setStroke(Color.BLACK);
         gc.strokeRect(0, 0 ,width * tileLength, height * tileLength);
         // Labyrinth Inhalt zeichnen
@@ -47,5 +55,14 @@ public class HelloController implements Initializable {
                 }
             }
         }
+    }
+
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        setLabyrinth(new Labyrinth(30, 20));
+        // Übergebe eine Funktion an das Objekt configurationPanel
+        configurationPanel.setCallbackFunction(this::setLabyrinth);
     }
 }

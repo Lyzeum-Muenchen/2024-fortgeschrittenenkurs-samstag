@@ -1,0 +1,30 @@
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.Button?>
+<fx:root
+    xmlns:fx="http://javafx.com/fxml"
+     type="de.lyzeum.labyrinth.labyrinth.ConfigurationPanel">
+    <Label text="Breite: "/>
+    <!-- Eingabefeld für Zahlen in einem best. Wertebereich -->
+    <Spinner
+        fx:id="spinnerWidth"
+        editable="true"
+        initialValue="10"
+        min="1"
+        max="100"
+    />
+
+    <Label text="Höhe: " />
+    <Spinner
+        fx:id="spinnerHeight"
+        editable="true"
+        initialValue="10"
+        min="1"
+        max="100"
+    />
+
+    <Button
+        onAction="#onGenerateClick"
+        text="Generiere Labyrinth"
+    />
+</fx:root>

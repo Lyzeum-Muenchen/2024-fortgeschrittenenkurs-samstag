@@ -21,7 +21,7 @@ public class Labyrinth {
         Stack<Integer> stack = new Stack<>();
         stack.push(0);
         visited[0] = true;
-        Random r = new Random(1L); // Zufallszahlengenerator erstellen
+        Random r = new Random(); // Zufallszahlengenerator erstellen
 
         while(!stack.isEmpty()) {
             // finde unbesuchte Nachbarfelder
