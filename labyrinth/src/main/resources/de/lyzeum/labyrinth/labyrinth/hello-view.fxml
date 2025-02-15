@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import de.lyzeum.labyrinth.labyrinth.ConfigurationPanel?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:id="borderPane"
             fx:controller="de.lyzeum.labyrinth.labyrinth.HelloController">
     <padding>
         <Insets topRightBottomLeft="5"/>

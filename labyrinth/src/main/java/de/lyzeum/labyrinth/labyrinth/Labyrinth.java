@@ -14,6 +14,10 @@ public class Labyrinth {
     }
 
     public Labyrinth(int width, int height) {
+        this(width, height, new Random().nextLong());
+    }
+
+    public Labyrinth(int width, int height, long seed) {
         this.width = width;
         this.height = height;
         g = new Graph(width * height);
@@ -21,7 +25,7 @@ public class Labyrinth {
         Stack<Integer> stack = new Stack<>();
         stack.push(0);
         visited[0] = true;
-        Random r = new Random(); // Zufallszahlengenerator erstellen
+        Random r = new Random(seed); // Zufallszahlengenerator erstellen
 
         while(!stack.isEmpty()) {
             // finde unbesuchte Nachbarfelder

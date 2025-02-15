@@ -1,6 +1,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
 <fx:root
     xmlns:fx="http://javafx.com/fxml"
      type="de.lyzeum.labyrinth.labyrinth.ConfigurationPanel">
@@ -22,6 +23,8 @@
         min="1"
         max="100"
     />
+    <Label text="Labyrinth Seed: "/>
+    <TextField fx:id="txtSeed" />
 
     <Button
         onAction="#onGenerateClick"
