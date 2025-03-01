@@ -17,6 +17,11 @@
         <ConfigurationPanel fx:id="configurationPanel" />
     </left>
     <center>
-        <Canvas fx:id="canvas" width="1200" height="900"/>
+        <Canvas
+            fx:id="canvas"
+            width="1200"
+            height="900"
+            onMouseClicked="#onMouseClicked"
+        />
     </center>
 </BorderPane>

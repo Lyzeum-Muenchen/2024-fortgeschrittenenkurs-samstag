@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.util.UUID;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class ConfigurationPanel extends VBox {
     @FXML
@@ -21,6 +22,8 @@ public class ConfigurationPanel extends VBox {
 
     // Erwartet ein Labyrinth als Eingabeparameter und hat Rückgabetyp "void"
     private Consumer<Labyrinth> callbackFunction;
+    private Runnable onScreenshotSaveRunnable;
+
 
     public ConfigurationPanel() {
         FXMLLoader fxmlLoader =
@@ -36,6 +39,11 @@ public class ConfigurationPanel extends VBox {
 
     public void setCallbackFunction(Consumer<Labyrinth> callbackFunction) {
         this.callbackFunction = callbackFunction;
+    }
+
+    // setze Funktion ohne Eingabeparameter und Rückgabetyp void
+    public void setSaveScreenshotFunction(Runnable runnable) {
+        this.onScreenshotSaveRunnable = runnable;
     }
 
     public void onGenerateClick() {
@@ -54,6 +62,10 @@ public class ConfigurationPanel extends VBox {
             );
             callbackFunction.accept(labyrinth);
         }
+    }
+
+    public void onSaveScreenshot() {
+        this.onScreenshotSaveRunnable.run(); // rufe Funktion auf
     }
 
     public long textToSeed(String textInput) {

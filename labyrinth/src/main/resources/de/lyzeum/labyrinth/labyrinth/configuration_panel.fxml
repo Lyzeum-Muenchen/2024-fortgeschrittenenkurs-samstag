@@ -30,4 +30,8 @@
         onAction="#onGenerateClick"
         text="Generiere Labyrinth"
     />
+    <Button
+        onAction="#onSaveScreenshot"
+        text="Speichere Labyrinth als Bild"
+    />
 </fx:root>

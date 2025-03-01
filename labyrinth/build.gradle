@@ -30,12 +30,12 @@ application {
 }
 
 javafx {
-    version = '21'
-    modules = ['javafx.controls', 'javafx.fxml']
+    version = '21.0.2'
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.swing']
 }
 
 dependencies {
-
+    implementation("org.openjfx:javafx-swing:21.0.2")
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
