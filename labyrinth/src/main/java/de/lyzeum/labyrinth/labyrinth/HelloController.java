@@ -9,12 +9,17 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -32,6 +37,7 @@ public class HelloController implements Initializable {
 
     private Labyrinth l;
     private double tileLength;
+    private List<Integer> solutionPath = List.of();
 
     // Werte sind entweder leer oder beinhalten Informationen
     private Optional<Integer> startTileId = Optional.empty();
@@ -39,6 +45,9 @@ public class HelloController implements Initializable {
 
     public void setLabyrinth(Labyrinth l) {
         this.l = l;
+        this.solutionPath = List.of();
+        this.startTileId = Optional.empty();
+        this.destTileId = Optional.empty();
         drawLabyrinth(borderPane.getWidth(), borderPane.getHeight());
     }
 
@@ -71,6 +80,9 @@ public class HelloController implements Initializable {
                 } else if (destTileId.isPresent() && destTileId.get() == curId) {
                     // andere Schreibweise für destTileId
                     gc.setFill(Color.RED);
+                    gc.fillRect(i * tileLength, j * tileLength, tileLength, tileLength);
+                } else if(solutionPath.contains(curId)) {
+                    gc.setFill(Color.GRAY);
                     gc.fillRect(i * tileLength, j * tileLength, tileLength, tileLength);
                 }
 
@@ -124,7 +136,12 @@ public class HelloController implements Initializable {
     public void saveScreenshot() {
         // Bild und Dateipfad vorbereiten
         Image image = canvas.snapshot(null, null);
-        String filePath = System.getProperty("user.dir") + "/test.jpg";
+        // Füge Zeitstempel zu Dateinamen hinzu
+        String filename = Instant.now()
+                .truncatedTo( ChronoUnit.SECONDS )
+                .toString()
+                .replace( ":" , "" ) + ".jpg";
+        String filePath = System.getProperty("user.dir") + "/" + filename;
         BufferedImage imageToWrite = new BufferedImage(
                 (int) (canvas.getWidth() <= 0 ? 800 : canvas.getWidth()),
                 (int) (canvas.getHeight() <= 0 ? 600 : canvas.getHeight()),
@@ -148,8 +165,16 @@ public class HelloController implements Initializable {
         if (startTileId.isEmpty() || destTileId.isPresent()) {
             startTileId = Optional.of(tileId);
             destTileId = Optional.empty();
+            solutionPath = List.of(); // setze Pfad zurück
         } else {
             destTileId = Optional.of(tileId);
+            // führe Wegsuche aus
+            BreadthFirstSearch bfs = new BreadthFirstSearch(
+                    l.getGraph(),
+                    startTileId.get(),
+                    destTileId.get()
+            );
+            solutionPath = bfs.getSolutionPath();
         }
         drawLabyrinth(borderPane.getWidth(), borderPane.getHeight());
     }
