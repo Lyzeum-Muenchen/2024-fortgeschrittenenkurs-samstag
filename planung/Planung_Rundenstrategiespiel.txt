@@ -1,0 +1,125 @@
+Planung Datenbankspiel
+
+Auswahl:
+- Helden, Items, Bosskämpfe (Rundenstrategie)
+
+
+
+- Handelsspiel
+- Stadtsimulation (Rundenstrategie)
+
+
+
+Umgebung?
+- Schach
+- Grid mit Deckungen/Spezialfeldern <<<<<<<
+- "Pokemon"-Kampfsystem
+
+Einzelner Charakter oder Team?
+-> Ein Charakter
+
+Rolle?
+	- Magier
+	- Jäger
+	- ...
+Ausrüstung?
+- Rüstung? JA
+	- implementiert als ein Item
+- Waffe?   JA
+	- implementiert als ein Item
+- Gebrauchsstände?
+	- Tränke
+	- Gift (für den Gegner)
+	- Inventarbox
+- Magie?
+	- JA, mit Ausdauer/Mana
+	- Fähigkeiten kosten Mana
+- zufällig generierte Karte
+- Savegames
+	
+Gameplay-Loop:
+- Spieler kann während einer Mission keine Items nachkaufen
+- Spieler besitzt HP und Mana
+- Spieler bewegt sich und greift danach an
+- Distanz spielt eine Rolle
+
+- Kampfmissionen
+	- Spaß?
+		- besseres Equipment sammeln
+		- neue Gegner kennenlernen
+		- Tränke brauen
+		- Abwechslung der Kartentypen
+	- Schwierigkeit?
+		- Levels
+		- Positionierung im Kampf spielt eine Rolle
+			- Distanz
+			- Feldtyp
+		- Überraschungen, welche nicht unfair sind?
+			- neue Gegner
+			- Spezialfähigkeiten
+			
+- Karte:
+	- 2D-Array
+	- Feld besitzt Effekte
+		- Schwächeboost
+		- Beeinflussung der Treffergenauigkeit
+			- Treffen oder nicht Treffen
+	- Spawnfeld
+	- Gegnerplatzierung
+	- Schwierigkeit der Gegner hängt von Mission ab
+
+Charakter:
+	- hp
+	- mana
+	- defense
+	- armorItem
+	- weapon
+	- spells
+	- consumableItems
+	
+- Angriff:
+	- Physischer Schaden bzw. Magischer Schaden
+	- Basis-Treffergenauigkeit
+	- Reichweitenlimit
+	
+Gegner:
+	- hp
+	- defense (magical/physical)
+	- attackState
+		- offensive
+		- defensive
+		- evasive
+	
+
+
+Shop:
+	- consumableItems
+	- weapons
+	- spells (am Item dran)
+	
+- NPCs mit Quests
+
+
+Optionale Features	
+- Skillbaum
+- (Tag-/Nacht)
+- Gegner mit AttackPattern
+
+
+Datenbank:
+ - Charakter
+ - Inventar
+	- Consumables
+	- Waffen
+	- Ressourcen
+	
+Plan:
+1.) Karte
+2.) Charakter
+3.) Gegner
+4.) Kämpfe in der Mission (simple Auswahl vom Missionstyp)
+	- User Interface
+--------------------
+5.) Datenbank
+6.) Shop
+7.) Missionsübersicht
