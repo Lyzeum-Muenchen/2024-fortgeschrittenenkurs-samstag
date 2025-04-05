@@ -3,6 +3,7 @@ package de.lyzeum.sql;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class SqlDatabase {
 
@@ -57,13 +58,22 @@ public class SqlDatabase {
             ResultSet rs = statement.executeQuery(query);
             // Bearbeite Ergebnisse der Anfrage zeilenweise
             while(rs.next()) {
+                int pk = rs.getInt("pk");
                 String vn = rs.getString("vorname");
                 String n = rs.getString("name");
-                results.add(new Person(vn, n));
+                results.add(new Person(Optional.of(pk), vn, n));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return results;
+    }
+
+    public void printDatabaseContent() {
+        List<Person> entries = fetchAllPerson();
+        // System.out.println(entries); // wird leider nicht lesbar formatiert
+        for (Person p: entries) {
+            System.out.println(p);
+        }
     }
 }
