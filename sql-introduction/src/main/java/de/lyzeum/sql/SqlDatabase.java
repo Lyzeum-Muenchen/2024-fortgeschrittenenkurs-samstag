@@ -25,6 +25,7 @@ public class SqlDatabase {
                     "vorname string," +
                     "name string)";
             statement.executeUpdate(queryCreateTable);
+            statement.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -42,6 +43,7 @@ public class SqlDatabase {
             statement.setString(2, person.name());
             statement.setQueryTimeout(30); // in Sekunden
             statement.executeUpdate();
+            statement.close();
             // ResultSet rs =
             // TODO Result anschauen
         } catch(SQLException e) {
@@ -63,10 +65,39 @@ public class SqlDatabase {
                 String n = rs.getString("name");
                 results.add(new Person(Optional.of(pk), vn, n));
             }
+            statement.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return results;
+    }
+
+    // TODO PreparedStatement
+    public void updatePerson(Person p) {
+        String query = "UPDATE Person SET vorname = ?, "
+                + "name = ? WHERE pk = ?;";
+        try (PreparedStatement statement
+                     = connection.prepareStatement(query)) {
+            statement.setString(1, p.vorname());
+            statement.setString(2, p.name());
+            statement.setInt(3, p.pk().orElseThrow());
+            // gibt Integer aus Optional zurück
+            // ODER wirft eine Exception
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deletePersonByPk(int pk) {
+        String query = "DELETE FROM Person where pk = ?;";
+        try (PreparedStatement statement =
+                     connection.prepareStatement(query)) {
+            statement.setInt(1, pk);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void printDatabaseContent() {
@@ -75,5 +106,6 @@ public class SqlDatabase {
         for (Person p: entries) {
             System.out.println(p);
         }
+        System.out.println("------------------");
     }
 }
