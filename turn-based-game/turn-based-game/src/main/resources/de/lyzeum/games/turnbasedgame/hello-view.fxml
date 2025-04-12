@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+<?import de.lyzeum.games.turnbasedgame.view.MapView?>
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="de.lyzeum.games.turnbasedgame.HelloController">
+  <MapView
+    fx:id="mapView"
+    minWidth="1600"
+    minHeight="700"
+  />
+</VBox>
