@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 public class HelloController implements Initializable {
     @FXML
     private MapView mapView;
-    private GameState gameState = new GameState();
+    private GameState gameState = new GameState(40, 20);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

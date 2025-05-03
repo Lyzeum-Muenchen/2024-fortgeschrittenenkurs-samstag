@@ -9,6 +9,7 @@ public class MapView extends StackPane {
     public MapView() {
         super();
         canvas = new MapCanvas();
+        this.getChildren().add(canvas);
     }
 
     public void updateWidth(double newValue) {
