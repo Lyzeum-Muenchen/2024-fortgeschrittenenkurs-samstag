@@ -16,7 +16,9 @@ public class MapView extends StackPane {
         canvas.setWidth(newValue);
     }
     public void updateHeight(double newValue) {
-        canvas.setHeight(newValue);
+        System.out.println(newValue);
+        this.setMinHeight(Math.max(500, 0.7 * newValue));
+        canvas.setHeight(0.7 * newValue);
     }
 
     public void updateScreen(GameState gameState) {

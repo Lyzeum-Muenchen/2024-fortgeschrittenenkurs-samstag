@@ -6,11 +6,15 @@
 
 <?import javafx.scene.control.Button?>
 <?import de.lyzeum.games.turnbasedgame.view.MapView?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+<VBox
+      prefWidth="Infinity"
+      prefHeight="Infinity"
+      alignment="CENTER"
+      spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="de.lyzeum.games.turnbasedgame.HelloController">
   <MapView
     fx:id="mapView"
-    minWidth="1600"
-    minHeight="700"
+    minWidth="600"
+    minHeight="400"
   />
 </VBox>

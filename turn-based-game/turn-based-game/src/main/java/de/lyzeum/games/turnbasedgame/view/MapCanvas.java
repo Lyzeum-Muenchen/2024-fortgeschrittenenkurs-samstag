@@ -25,6 +25,15 @@ public class MapCanvas extends Canvas {
                 gc.fillRect(posX, posY, tileLength, tileLength);
             }
         }
+        // Zeichne Ränder
+        for (int i = 0; i < gameState.getLevelWidth(); i++) {
+            for (int j = 0; j < gameState.getLevelHeight(); j++) {
+                double posX = tileLength * i;
+                double posY = tileLength * j;
+                gc.setStroke(Color.BLACK);
+                gc.strokeRect(posX, posY, tileLength, tileLength);
+            }
+        }
     }
 
     private Color getFillColor(Tile tile) {
