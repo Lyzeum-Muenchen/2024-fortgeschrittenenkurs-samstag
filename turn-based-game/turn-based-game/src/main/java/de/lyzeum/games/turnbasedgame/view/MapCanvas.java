@@ -6,6 +6,7 @@ import de.lyzeum.games.turnbasedgame.model.Position;
 import de.lyzeum.games.turnbasedgame.model.Tile;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 import java.util.Set;
@@ -13,8 +14,22 @@ import java.util.Set;
 public class MapCanvas extends Canvas {
 
     private double tileLength;
+    private GameState gameState;
+
+    public MapCanvas() {
+        this.setOnMousePressed(this::onMousePressed);
+    }
+    public void onMousePressed(MouseEvent event) {
+        if (tileLength > 0 && gameState != null) {
+            int tileX = (int)(event.getX() / tileLength);
+            int tileY = (int)(event.getY() / tileLength);
+            gameState.onTilePressed(new Position(tileX, tileY));
+        }
+
+    }
 
     public void updateScreen(GameState gameState) {
+        this.gameState = gameState;
         GameCharacter brandon = gameState.getCharacters().getFirst();
         Set<Position> walkablePositions = gameState.getWalkablePositions(
                 brandon.getCurrentPosition(),
@@ -35,15 +50,23 @@ public class MapCanvas extends Canvas {
             }
         }
         // Zeichne Ränder
-        // TODO walkablePositions speziell markieren
-        for (int i = 0; i < gameState.getLevelWidth(); i++) {
-            for (int j = 0; j < gameState.getLevelHeight(); j++) {
-                double posX = tileLength * i;
-                double posY = tileLength * j;
-                gc.setStroke(Color.BLACK);
-                gc.strokeRect(posX, posY, tileLength, tileLength);
-            }
-        }
+       for (int layer = 0; layer < 2; layer++) {
+           for (int i = 0; i < gameState.getLevelWidth(); i++) {
+               for (int j = 0; j < gameState.getLevelHeight(); j++) {
+                   double posX = tileLength * i;
+                   double posY = tileLength * j;
+                   boolean isWalkablePosition = walkablePositions.contains(new Position(i, j));
+                   if (layer == 0 && !isWalkablePosition) {
+                       gc.setStroke(Color.BLACK);
+                       gc.strokeRect(posX, posY, tileLength, tileLength);
+                   } else if(layer == 1 && isWalkablePosition) {
+                       gc.setStroke(Color.YELLOW);
+                       gc.strokeRect(posX, posY, tileLength, tileLength);
+                   }
+
+               }
+           }
+       }
 
         for (GameCharacter character: gameState.getCharacters()) {
             double posX = character.getCurrentPosition().posX() * tileLength;

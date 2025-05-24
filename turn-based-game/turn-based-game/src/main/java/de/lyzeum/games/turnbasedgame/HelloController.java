@@ -2,9 +2,13 @@ package de.lyzeum.games.turnbasedgame;
 
 import de.lyzeum.games.turnbasedgame.model.GameState;
 import de.lyzeum.games.turnbasedgame.view.MapView;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,6 +17,7 @@ public class HelloController implements Initializable {
     @FXML
     private MapView mapView;
     private GameState gameState = new GameState(40, 20);
+    private Timeline tlGameloop;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -34,6 +39,15 @@ public class HelloController implements Initializable {
                     updateScreen();
                 }
         );
+
+        KeyFrame kfGameloop = new KeyFrame(
+                Duration.millis(15),
+                "gameloop",
+                event -> this.updateScreen()
+        );
+        tlGameloop = new Timeline(kfGameloop);
+        tlGameloop.setCycleCount(Animation.INDEFINITE);
+        tlGameloop.play();
     }
 
     public void updateScreen() {

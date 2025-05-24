@@ -98,4 +98,11 @@ public class GameState {
         result.removeAll(alliedPositions);
         return result;
     }
+
+    public void onTilePressed(Position position) {
+        // TODO Figur auf das nächste Feld bewegen, falls es eine walkablePosition ist
+        // walkablePositions ermitteln
+        // Check ob ausgewählte Position im Set liegt
+        // Bewegung durchführen, falls Zug erlaubt ist
+    }
 }
