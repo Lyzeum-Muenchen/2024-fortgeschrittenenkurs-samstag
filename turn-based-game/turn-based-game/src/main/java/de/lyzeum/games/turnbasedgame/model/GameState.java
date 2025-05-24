@@ -1,19 +1,38 @@
 package de.lyzeum.games.turnbasedgame.model;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class GameState {
     private Tile[][] tiles;
     private List<GameCharacter> characters;
     // Enemies
+    private List<GameCharacter> enemies;
 
     public GameState(int levelWidth, int levelHeight) {
         initMap(levelWidth, levelHeight);
 
         characters = List.of(new Brandon(new Position(1, 1)));
+        spawnEnemies();
+    }
+
+    private void spawnEnemies() {
+        // Felder mit x>=10 und y>=10 auswählen
+        List<Position> candidates = new ArrayList<>();
+        for (int i = 10; i < getLevelWidth(); i++) {
+            for (int j = 10; j < getLevelHeight(); j++) {
+                if (tiles[i][j].isWalkable()) {
+                    candidates.add(new Position(i, j));
+                }
+            }
+        }
+        Random r = new Random();
+        enemies = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            int nextIndex = r.nextInt(candidates.size());
+            enemies.add(new Brandon(candidates.get(nextIndex)));
+            candidates.remove(nextIndex);
+        }
     }
 
     public Tile[][] getTiles() {
@@ -39,7 +58,7 @@ public class GameState {
                         || i == levelWidth - 1
                         || j == 0
                         || j == levelHeight - 1
-                        || Math.random() < 0.01
+                        || Math.random() < 0.1
                 ) {
                     // Falls Randfeld, setze nicht begehbares Feld
                     tiles[i][j] = Tile.WALL_BORDER_TILE;
@@ -52,6 +71,10 @@ public class GameState {
 
     public List<GameCharacter> getCharacters() {
         return characters;
+    }
+
+    public List<GameCharacter> getEnemies() {
+        return enemies;
     }
 
     public Set<Position> getNeighbors(Position curPos) {
@@ -95,14 +118,24 @@ public class GameState {
         Set<Position> alliedPositions = characters.stream()
                 .map(character -> character.getCurrentPosition())
                 .collect(Collectors.toSet());
+        Set<Position> enemyPositions = enemies.stream()
+                .map(character -> character.getCurrentPosition())
+                .collect(Collectors.toSet());
         result.removeAll(alliedPositions);
+        result.removeAll(enemyPositions);
         return result;
     }
 
     public void onTilePressed(Position position) {
-        // TODO Figur auf das nächste Feld bewegen, falls es eine walkablePosition ist
         // walkablePositions ermitteln
+        Position startPos = characters.getFirst().getCurrentPosition();
+        int stepsPerTurn = characters.getFirst().getStepsPerTurn();
+        Set<Position> walkablePos = getWalkablePositions(startPos, stepsPerTurn);
         // Check ob ausgewählte Position im Set liegt
-        // Bewegung durchführen, falls Zug erlaubt ist
+        if (walkablePos.contains(position)) {
+            // Bewegung durchführen, falls Zug erlaubt ist
+            characters.getFirst().currentPosition = position;
+        }
+
     }
 }

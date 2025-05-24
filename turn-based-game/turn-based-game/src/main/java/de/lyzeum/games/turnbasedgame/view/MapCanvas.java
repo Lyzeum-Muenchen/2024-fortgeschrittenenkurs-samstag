@@ -25,7 +25,6 @@ public class MapCanvas extends Canvas {
             int tileY = (int)(event.getY() / tileLength);
             gameState.onTilePressed(new Position(tileX, tileY));
         }
-
     }
 
     public void updateScreen(GameState gameState) {
@@ -72,6 +71,13 @@ public class MapCanvas extends Canvas {
             double posX = character.getCurrentPosition().posX() * tileLength;
             double posY = character.getCurrentPosition().posY() * tileLength;
             gc.setFill(Color.BLUE); // TODO Textur einfügen
+            gc.fillRect(posX, posY, tileLength, tileLength);
+        }
+
+        for (GameCharacter character: gameState.getEnemies()) {
+            double posX = character.getCurrentPosition().posX() * tileLength;
+            double posY = character.getCurrentPosition().posY() * tileLength;
+            gc.setFill(Color.MEDIUMVIOLETRED); // TODO Textur einfügen
             gc.fillRect(posX, posY, tileLength, tileLength);
         }
     }
