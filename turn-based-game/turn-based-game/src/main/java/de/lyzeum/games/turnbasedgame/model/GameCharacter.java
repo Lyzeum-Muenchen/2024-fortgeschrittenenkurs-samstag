@@ -14,6 +14,7 @@ public abstract class GameCharacter {
 
     protected Position currentPosition;
     protected int stepsPerTurn;
+    protected boolean isHumanControlled;
     // TODO
     // baseDodgeChange
 
@@ -23,7 +24,7 @@ public abstract class GameCharacter {
     // dodgeable ( true/false)
 
 
-    public GameCharacter(double curHealth, double maxHealth, double curStamina, double maxStamina, double baseAttackDmg, double baseResistance, Set<ElementalType> resistances, Position currentPosition, int stepsPerTurn) {
+    public GameCharacter(double curHealth, double maxHealth, double curStamina, double maxStamina, double baseAttackDmg, double baseResistance, Set<ElementalType> resistances, Position currentPosition, int stepsPerTurn, boolean isHumanControlled) {
         this.curHealth = curHealth;
         this.maxHealth = maxHealth;
         this.curStamina = curStamina;
@@ -33,6 +34,7 @@ public abstract class GameCharacter {
         this.resistances = resistances;
         this.currentPosition = currentPosition;
         this.stepsPerTurn = stepsPerTurn;
+        this.isHumanControlled = isHumanControlled;
     }
 
 

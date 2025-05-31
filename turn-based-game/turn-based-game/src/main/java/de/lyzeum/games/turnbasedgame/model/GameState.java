@@ -12,7 +12,7 @@ public class GameState {
     public GameState(int levelWidth, int levelHeight) {
         initMap(levelWidth, levelHeight);
 
-        characters = List.of(new Brandon(new Position(1, 1)));
+        characters = List.of(new Brandon(new Position(1, 1), true));
         spawnEnemies();
     }
 
@@ -30,7 +30,7 @@ public class GameState {
         enemies = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             int nextIndex = r.nextInt(candidates.size());
-            enemies.add(new Brandon(candidates.get(nextIndex)));
+            enemies.add(new Brandon(candidates.get(nextIndex), false));
             candidates.remove(nextIndex);
         }
     }
