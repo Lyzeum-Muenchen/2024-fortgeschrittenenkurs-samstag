@@ -5,6 +5,8 @@ import de.lyzeum.games.turnbasedgame.model.GameCharacter;
 import de.lyzeum.games.turnbasedgame.model.GameState;
 import de.lyzeum.games.turnbasedgame.model.Position;
 
+import java.util.Optional;
+
 public class SingleTargetAbility extends ActiveAbility {
 
 	protected double damage;
@@ -26,8 +28,19 @@ public class SingleTargetAbility extends ActiveAbility {
 	@Override
 	public void applyActiveAbility(Position targetPosition, GameCharacter executor, GameState gameState) {
 		// Ziel finden
-		// Schaden anwenden
-		// Stamina reduzieren
+		Optional<GameCharacter> target = gameState.getCharacters(!executor.isHumanControlled())
+				.stream()
+				.filter(character -> character.getCurrentPosition().equals(targetPosition))
+				.findFirst();
+		if (target.isPresent()) {
+			// Schaden anwenden
+			target.get().applyDamage(damage, elementalType);
+			// Stamina reduzieren
+			executor.subtractStamina(staminaCost);
+		} else {
+			throw new RuntimeException("Character not found");
+		}
+
 	}
 
 	@Override

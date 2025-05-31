@@ -73,4 +73,21 @@ public abstract class GameCharacter {
     public int getStepsPerTurn() {
         return stepsPerTurn;
     }
+
+    public boolean isHumanControlled() {
+        return isHumanControlled;
+    }
+
+    public void subtractStamina(int value) {
+        curStamina -= value;
+    }
+
+    public void applyDamage(double damage, ElementalType elementalType) {
+        damage = Math.max(1, damage - baseResistance);
+        if (resistances.contains(elementalType)) {
+            damage = Math.max(1, damage * 0.7);
+        }
+        // TODO Weakness
+        curHealth = Math.max(0, curHealth - damage);
+    }
 }

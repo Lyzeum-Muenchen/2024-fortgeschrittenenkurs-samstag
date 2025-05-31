@@ -5,9 +5,9 @@ import java.util.stream.Collectors;
 
 public class GameState {
     private Tile[][] tiles;
-    private List<GameCharacter> characters;
+    private List<GameCharacter> characters; // human controlled
     // Enemies
-    private List<GameCharacter> enemies;
+    private List<GameCharacter> enemies; // ai controlled
 
     public GameState(int levelWidth, int levelHeight) {
         initMap(levelWidth, levelHeight);
@@ -137,5 +137,13 @@ public class GameState {
             characters.getFirst().currentPosition = position;
         }
 
+    }
+
+    public List<GameCharacter> getCharacters(boolean isHumanControllled) {
+        if (isHumanControllled) {
+            return characters;
+        } else {
+            return enemies;
+        }
     }
 }
