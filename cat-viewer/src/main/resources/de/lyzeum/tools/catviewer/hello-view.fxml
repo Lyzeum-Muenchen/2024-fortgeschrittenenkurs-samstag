@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="de.lyzeum.tools.catviewer.HelloController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <ImageView
+            fx:id="imageView"
+            fitWidth="800"
+            fitHeight="800"
+            preserveRatio="true"
+    />
+    <fx:define>
+        <ToggleGroup fx:id="groupTag" />
+    </fx:define>
+    <FlowPane vgap="5" hgap="5">
+        <RadioButton
+                text="Random"
+                selected="true"
+                toggleGroup="$groupTag"
+                />
+        <RadioButton
+            text="party"
+            toggleGroup="$groupTag"
+            />
+        <RadioButton
+            text="linux"
+            toggleGroup="$groupTag"
+            />
+    </FlowPane>
+    <FlowPane>
+        <Button text="Load Image" onAction="#onLoadImageClick" />
+    </FlowPane>
+    <Label fx:id="lblError"/>
+</VBox>
