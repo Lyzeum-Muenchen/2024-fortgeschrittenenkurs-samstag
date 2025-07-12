@@ -24,7 +24,7 @@
     <fx:define>
         <ToggleGroup fx:id="groupTag" />
     </fx:define>
-    <FlowPane vgap="5" hgap="5">
+    <FlowPane vgap="5" hgap="5" fx:id="flowPaneTags">
         <RadioButton
                 text="Random"
                 selected="true"
@@ -41,6 +41,7 @@
     </FlowPane>
     <FlowPane>
         <Button text="Load Image" onAction="#onLoadImageClick" />
+        <Button text="Fetch Tags" onAction="#onRefreshTagsClick" />
     </FlowPane>
     <Label fx:id="lblError"/>
 </VBox>

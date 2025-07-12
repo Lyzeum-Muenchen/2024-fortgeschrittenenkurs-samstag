@@ -6,6 +6,10 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
+
+import java.util.Collections;
+import java.util.List;
 
 public class HelloController {
 	@FXML
@@ -15,8 +19,11 @@ public class HelloController {
 	private ImageView imageView;
 	@FXML
 	private Label lblError;
+	@FXML
+	private FlowPane flowPaneTags;
 
 	private final String baseUrl = "https://cataas.com/cat";
+	private CatTagWebClient webClient = new CatTagWebClient();
 	private Image image;
 
 	public void onLoadImageClick() {
@@ -42,5 +49,25 @@ public class HelloController {
 							+ image.getException().getMessage();
 			lblError.setText(errMsg);
 		}
+	}
+
+	public void onRefreshTagsClick() {
+		List<String> results = webClient.fetchTags();
+		flowPaneTags.getChildren().clear();
+		RadioButton radioButtonRandom = new RadioButton("Random");
+		radioButtonRandom.setToggleGroup(groupTag);
+		radioButtonRandom.setSelected(true);
+		flowPaneTags.getChildren().add(radioButtonRandom);
+
+		Collections
+				.shuffle(results);
+		results
+				.stream()
+				.limit(20)
+				.forEach(tagName -> {
+			RadioButton button =  new RadioButton(tagName);
+			button.setToggleGroup(groupTag);
+			flowPaneTags.getChildren().add(button);
+		});
 	}
 }
